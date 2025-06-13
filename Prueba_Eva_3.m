@@ -3,14 +3,11 @@
 clear all
 close all
 
-% ----- 
 % [I,map] = imread('capture_1548243990843.jpg');
 % [I,map] = imread('capture_1548244948896.jpg');
 % [I,map] = imread('capture_1548244759635.jpg');
 % [I,map] = imread('capture_1548244554243.jpg');
-% ---- 
 % [I,map] = imread('capture_1548244406801.jpg');
-
 % [I,map] = imread('capture_1548244339396.jpg');
 [I,map] = imread('capture_1548244150176.jpg');
 
@@ -18,8 +15,6 @@ close all
 figure; 
 imshow(I);
 title(['Original Image']);
-
-
 
 %% Vemos el nivel de intensidad de cada componente RGB
 figure; imshow(I(:,:,1)); % Rojo
@@ -81,7 +76,6 @@ title(['Binarized Image']);
 
 %% Excentricidad
 % Obtener las propiedades de las regiones conectadas
-% stats = regionprops(BW, 'Eccentricity');
 stats = regionprops(BW, 'Eccentricity', 'Area', 'Solidity', 'BoundingBox');
 
 cuantas = size(stats);
@@ -110,10 +104,8 @@ title(['Area']);
 
 
 % Acceder a la excentricidad del primer objeto (ajusta el índice si tienes múltiples objetos)
-%excentricidad = stats(1).Eccentricity;
 
 % Mostrar la excentricidad
-%disp(['La excentricidad del objeto es: ', num2str(excentricidad)]);
 
 %% Etiquetar y contar
 L = bwlabel(BW);
@@ -122,13 +114,7 @@ numero_de_celulas = max(max(L));
 Tamano = [];
 stats = regionprops(L, 'Area');
 Tamano = [stats.Area];
-% for i=1:numero_de_celulas,
-%     aux = find(L==i);
-%     aux2 = size(aux);
-%     Tamano = [Tamano aux2(1,1)];
-% end
-figure; stem(Tamano);
-% representación tamaño frente a escentricidad
+
 figure; scatter(excentricidad,Tamano);
 title(['Relación de características']);
 xlabel('Excentricidad');
@@ -199,7 +185,6 @@ figure; imshow(I2)
 title(['Cells located after removing small noise']);
 
 
-
 %% Etiquetar y contar
 L = bwlabel(1-BWEDE);
 numero_de_celulas = max(max(L));
@@ -207,19 +192,6 @@ figure; imshow(1-BWEDE);
 title(['After counting (again)']);
 figure; imshow(BWEDE); 
 title(['After counting (again)']);
-
-% I2=I;
-% for i=1:numero_de_celulas,
-%     [aux3,aux4] = find(L==i);
-%     for j=1:size(aux3),
-%         I2(aux3(j),aux4(j),1) = 255;
-%         I2(aux3(j),aux4(j),2) = 0;
-%         I2(aux3(j),aux4(j),3) = 0;
-%     end
-% end
-% title(['Cells located after counting?']);
-
-
 
 %%Eliminar elementos pequeños
 Tamano_Corte = 700;
@@ -239,7 +211,6 @@ BW2=BW;
 Tamano_borde = 800;
 
 
-
 %%Eliminar cuando la excentricidad es menor a 0,8
 Tamano_Excentricity = 0.8;
 Tamano_Superior_Cell= 800;
@@ -251,12 +222,6 @@ numero_de_celulas = max(max(L));
 Tamano = [];
 stats = regionprops(L, 'Area', 'Eccentricity', 'Solidity', 'BoundingBox');
 Tamano = [stats.Area];
-% for i=1:numero_de_celulas,
-%     aux = find(L==i);
-%     aux2 = size(aux);
-%     Tamano = [Tamano aux2(1,1)];
-% end
-% Excentricida
 
 cuantas = size(stats);
 excentricidad = [];
@@ -377,41 +342,6 @@ end
 figure; imshow(BW_rescued);
 title('Rescued cells after eroding and solidity test');
 
-
-% Etiquetar y contar
-% numero_de_celulas_patologicas_f;
-% 
-% I2=I;
-% 
-% for i=1:numero_de_celulas_patologicas_f,
-%     [aux3,aux4] = find(L==posi_patologica_f(i));
-%     for j=1:size(aux3),
-%         I2(aux3(j),aux4(j),1) = 0;
-%         I2(aux3(j),aux4(j),2) = 255;
-%         I2(aux3(j),aux4(j),3) = 0;
-%     end
-% end
-% figure; imshow(I2)
-% 
-% BW_failed_eroded = imerode(BW_failed, strel('disk', 4));
-% figure; imshow(BW_failed_eroded)
-% title('After eroding')
-% 
-
-
-%%Pintar la imagen original e indicar número de células
-% 
-% L_eroded = bwlabel(BW_failed_eroded);
-% stats_eroded = regionprops(L_eroded, 'Solidity', 'Area');
-% solidity_eroded = [stats_eroded.Solidity];
-
-% BW_rescued = false(size(BW));
-% for k = 1:length(solidity_eroded)
-%     if solidity_eroded(k) >= 0.9 * avg_solidity
-%         BW_rescued(L_eroded == k) = 1;
-%     end
-% end
-
 BW_final = BW | BW_rescued;
 
 
@@ -422,18 +352,6 @@ figure; imshow(BW_final);
 title('Final image with rescued cells re-added');
 
 
-% BW_dilated = imdilate(BW_failed_eroded, strel('disk', 3));
-% title('After dilating')
-% figure; imshow(BW_dilated)
-
-% Label the components – they may now be split
-% L = bwlabel(BW_dilated);
-
-
-% Etiquetar y contar
-% L = bwlabel(BW);
-% L = bwlabel(BW_final);
-
 numero_de_celulas = max(max(L));
 
 L = bwlabel(BW_final);
@@ -442,12 +360,6 @@ numero_de_celulas = max(max(L));
 Tamano_fin = [];
 stats = regionprops(L, 'Area');
 Tamano_fin = [stats.Area];
-% for i=1:numero_de_celulas,
-%     aux = find(L==i);
-%     aux2 = size(aux);
-%     Tamano_fin = [Tamano_fin aux2(1,1)];
-% end
-
 
 figure; stem(Tamano_fin);
 title(['Size of cells in final pic'])
@@ -458,7 +370,6 @@ for i=1:numero_de_celulas,
         BW_final(L == i) = 0;
     end
 end
-
 
 figure; imshow(BW_final);
 title('Final image with after removing small small things');
@@ -490,13 +401,6 @@ Tamano = [];
 
 stats = regionprops(L, 'Area');
 Tamano = [stats.Area];
-% for i=1:numero_de_celulas,
-%     aux = find(L==i);
-%     aux2 = size(aux);
-%     Tamano = [Tamano aux2(1,1)];
-% end
-
-
 
 %Poner a cero el valor si lo cumple
 for i=1:numero_de_celulas,
@@ -534,7 +438,6 @@ for i=1:numero_de_celulas_patologicas,
 end
 figure; imshow(I2)
 title(['Normal cells and pathological cells located !!! '])
-
 
 NombreFichero=['capture_1548243990843_Glob_Rojo_',int2str(numero_de_celulas),'_Pat_',int2str(numero_de_celulas_patologicas),'.jpg'];
 % imwrite(I2, NombreFichero);
