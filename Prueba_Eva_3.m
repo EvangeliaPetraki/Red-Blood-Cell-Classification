@@ -439,7 +439,3 @@ end
 figure; imshow(I2)
 title(['Normal cells and pathological cells located !!! '])
 
-NombreFichero=['capture_1548243990843_Glob_Rojo_',int2str(numero_de_celulas),'_Pat_',int2str(numero_de_celulas_patologicas),'.jpg'];
-% imwrite(I2, NombreFichero);
-% Guardar la imagen como un archivo JPEG con alta calidad
-%imwrite(I2, NombreFichero, 'Quality', 100);
