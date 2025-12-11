@@ -87,8 +87,8 @@ Both scripts produce:
 
 ## Citation
 
-This work was accepted and presented as a **full paper at an international conference** on biomedical image analysis and diagnostic automation.
+This work was accepted and presented as a full paper at the International Joint Conference on Computational Intelligence 2025.
 
-If you use this code, please cite the corresponding publication (details to be added based on your paper reference).
+If you use this code, please cite the corresponding publication (details to be added).
 
 
