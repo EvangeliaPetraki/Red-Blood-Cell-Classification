@@ -1,7 +1,7 @@
 # Red Blood Cell Detection and Fuzzy Classification
 
 This repository contains two MATLAB pipelines for detecting, segmenting, and classifying red blood cells (RBCs) in microscopy images.  
-The project was published as a **full paper in an international conference** and implements both traditional image processing and fuzzy logic–based classification.
+The project implements both traditional image processing and fuzzy logic–based classification.
 
 ---
 
