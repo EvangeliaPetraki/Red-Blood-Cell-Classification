@@ -7,8 +7,8 @@ The project implements both traditional image processing and fuzzy logic–based
 
 ## Contents
 
-- `Prueba_Eva_fuzzy.txt` – Complete RBC detection and **fuzzy logic classifier** implementation. :contentReference[oaicite:0]{index=0}  
-- `Prueba_Eva_3.txt` – Extended RBC segmentation and refinement workflow (noise removal, reshaping, morphological filtering, rescue logic). :contentReference[oaicite:1]{index=1}  
+- `Prueba_Eva_fuzzy.txt` – Complete RBC detection and **fuzzy logic classifier** implementation.
+- `Prueba_Eva_3.txt` – Extended RBC segmentation and refinement workflow (noise removal, reshaping, morphological filtering, rescue logic).
 
 ---
 
